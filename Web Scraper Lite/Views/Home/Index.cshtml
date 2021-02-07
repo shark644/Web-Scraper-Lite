@@ -50,18 +50,26 @@
 </table>
 }
 
-@if (Model.Images != null && Model.Images.Count > 0)
+@if (Model.Images == null || Model.Images.Count == 0)
 {
-<h3>All images on the page are displayed in below carousel</h3>
+<h3>No images were found on @Model.Url</h3>
+<p>Some websites do not include images in document but only load image from client side. View source of any page is source of truth</p>
+}
+else
+{
+<h3>@Model.Images.Count images on the page are displayed in below carousel</h3>
+<p>Note: some images might be in white color, wait or keep scrolling to view all images</p>
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
         @foreach (var image in Model.Images)
-            {
-                var css = (imageCounter++ == 1) ? "active" : string.Empty;
+                {
+                    var css = (imageCounter++ == 1) ? "active" : string.Empty;
         <div class="carousel-item @css">
-            <img class="d-block w-100" src="@image" alt="First slide">
+            
+            
+            class="d-block w-100" src="@image" alt="First slide">
         </div>
-            }
+                }
 
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -73,6 +81,4 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-
 }
-
